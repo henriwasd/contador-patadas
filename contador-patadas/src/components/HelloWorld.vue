@@ -18,11 +18,18 @@
         <v-btn class="mx-2" fab dark large color="green">
           <v-icon dark>mdi-play</v-icon>
         </v-btn>
-        <v-btn class="mx-2" fab dark large color="red">
+        <v-btn
+          v-on:click="addArrayTimes()"
+          class="mx-2"
+          fab
+          dark
+          large
+          color="red"
+        >
           <v-icon dark>mdi-stop</v-icon>
         </v-btn>
         <p class="display-1 font-weight-medium">
-          {{ tempo.horas }} : {{ tempo.minutos }} : {{ tempo.segundos }}
+          {{ this.dateNow }}
         </p>
       </v-col>
 
@@ -40,11 +47,8 @@
                 </tr>
               </thead>
               <tbody>
-                <tr
-                  v-for="tempoRegistrado in desserts"
-                  :key="tempoRegistrado.tempo"
-                >
-                  <td>{{ tempoRegistrado.tempo }}</td>
+                <tr v-for="time in times" :key="time">
+                  <td>{{ time }}</td>
                 </tr>
               </tbody>
             </template>
@@ -61,12 +65,24 @@ export default {
   name: "HelloWorld",
 
   data: () => ({
-    tempo: {
-      horas: moment.now(),
-      minutos: moment.now(),
-      segundos: moment.now()
-    },
-    tempoRegistrado: [this.tempo]
-  })
+    horaUltimaPatada: new Date(),
+    dateNow: moment()
+      .startOf("year")
+      .format("HH:mm:ss"),
+    times: []
+  }),
+  created: function() {
+    const self = this;
+    setInterval(function() {
+      self.dateNow = moment()
+        .add(1, "s")
+        .format("HH:mm:ss");
+    }, 100);
+  },
+  computed: {
+    addArrayTimes: () => {
+      this.times.push(this.dateNow);
+    }
+  }
 };
 </script>
