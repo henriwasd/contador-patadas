@@ -22,7 +22,7 @@
           <v-icon dark>mdi-stop</v-icon>
         </v-btn>
         <p class="display-1 font-weight-medium">
-          {tempo.hora} : {tempo.minuto} : {tempo.segundos}
+          {{ tempo.horas }} : {{ tempo.minutos }} : {{ tempo.segundos }}
         </p>
       </v-col>
 
@@ -56,12 +56,15 @@
 </template>
 
 <script>
+import moment from "moment";
 export default {
   name: "HelloWorld",
 
   data: () => ({
     tempo: {
-      hora: Date.now()
+      horas: moment.now(),
+      minutos: moment.now(),
+      segundos: moment.now()
     },
     tempoRegistrado: [this.tempo]
   })
