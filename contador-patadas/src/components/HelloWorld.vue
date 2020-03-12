@@ -10,45 +10,34 @@
         />
       </v-col>
 
-      <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Contador de patadas
-        </h1>
-
-        <v-btn class="mx-2" fab dark large color="green">
-          <v-icon dark>mdi-play</v-icon>
-        </v-btn>
-        <v-btn
-          v-on:click="addArrayTimes()"
-          class="mx-2"
-          fab
-          dark
-          large
-          color="red"
-        >
-          <v-icon dark>mdi-stop</v-icon>
-        </v-btn>
-        <p class="display-1 font-weight-medium">
-          {{ this.dateNow }}
-        </p>
-      </v-col>
-
       <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-3">
-          Tabela com os resultados anteriores
-        </h2>
+        <v-col class="mb-4">
+          <h1 class="display-2 font-weight-bold mb-3">Contador de patadas</h1>
+
+          <p class="display-1 font-weight-medium">{{ this.dateNow }}</p>
+          <v-btn
+            v-on:click="times.push(dateNow)"
+            class="mx-2"
+            fab
+            dark
+            large
+            color="red"
+          >
+            <v-icon dark>mdi-hand-pointing-right</v-icon>
+          </v-btn>
+        </v-col>
 
         <v-row justify="center">
           <v-simple-table>
             <template v-slot:default>
               <thead>
                 <tr>
-                  <th class="text-left display-1">Tempo sem patadas</th>
+                  <th class="text-left display-1">Tempos sem patadas</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="time in times" :key="time">
-                  <td>{{ time }}</td>
+                  <td class="headline">{{ time }}</td>
                 </tr>
               </tbody>
             </template>
@@ -78,11 +67,6 @@ export default {
         .add(1, "s")
         .format("HH:mm:ss");
     }, 100);
-  },
-  computed: {
-    addArrayTimes: () => {
-      this.times.push(this.dateNow);
-    }
   }
 };
 </script>
