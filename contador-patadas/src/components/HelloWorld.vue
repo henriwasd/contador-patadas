@@ -15,12 +15,14 @@
           Contador de patadas
         </h1>
 
-        <p class="subheading font-weight-regular">
-          TODO: Botões para iniciar o cronometro e zerar
-          <br />
-        </p>
-        <p class="subheading font-weight-regular">
-          TODO: o cronometro
+        <v-btn class="mx-2" fab dark large color="green">
+          <v-icon dark>mdi-play</v-icon>
+        </v-btn>
+        <v-btn class="mx-2" fab dark large color="red">
+          <v-icon dark>mdi-stop</v-icon>
+        </v-btn>
+        <p class="display-1 font-weight-medium">
+          {tempo.hora} : {tempo.minuto} : {tempo.segundos}
         </p>
       </v-col>
 
@@ -30,7 +32,23 @@
         </h2>
 
         <v-row justify="center">
-          <p>Tabela</p>
+          <v-simple-table>
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th class="text-left display-1">Tempo sem patadas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="tempoRegistrado in desserts"
+                  :key="tempoRegistrado.tempo"
+                >
+                  <td>{{ tempoRegistrado.tempo }}</td>
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
         </v-row>
       </v-col>
     </v-row>
@@ -42,56 +60,10 @@ export default {
   name: "HelloWorld",
 
   data: () => ({
-    ecosystem: [
-      {
-        text: "vuetify-loader",
-        href: "https://github.com/vuetifyjs/vuetify-loader"
-      },
-      {
-        text: "github",
-        href: "https://github.com/vuetifyjs/vuetify"
-      },
-      {
-        text: "awesome-vuetify",
-        href: "https://github.com/vuetifyjs/awesome-vuetify"
-      }
-    ],
-    importantLinks: [
-      {
-        text: "Documentation",
-        href: "https://vuetifyjs.com"
-      },
-      {
-        text: "Chat",
-        href: "https://community.vuetifyjs.com"
-      },
-      {
-        text: "Made with Vuetify",
-        href: "https://madewithvuejs.com/vuetify"
-      },
-      {
-        text: "Twitter",
-        href: "https://twitter.com/vuetifyjs"
-      },
-      {
-        text: "Articles",
-        href: "https://medium.com/vuetify"
-      }
-    ],
-    whatsNext: [
-      {
-        text: "Explore components",
-        href: "https://vuetifyjs.com/components/api-explorer"
-      },
-      {
-        text: "Select a layout",
-        href: "https://vuetifyjs.com/layout/pre-defined"
-      },
-      {
-        text: "Frequently Asked Questions",
-        href: "https://vuetifyjs.com/getting-started/frequently-asked-questions"
-      }
-    ]
+    tempo: {
+      hora: Date.now()
+    },
+    tempoRegistrado: [this.tempo]
   })
 };
 </script>
