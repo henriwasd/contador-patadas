@@ -16,7 +16,7 @@
 
           <p class="display-1 font-weight-medium">{{ this.dateCustom }}</p>
           <v-btn
-            v-on:click="times.push(dateNow)"
+            v-on:click="zerandoContador"
             class="mx-2"
             fab
             dark
@@ -64,6 +64,12 @@ export default {
     setInterval(function() {
       self.dateCustom = self.dateNow.add(1, "seconds").format("HH:mm:ss");
     }, 1000);
+  },
+  methods: {
+    zerandoContador() {
+      this.times.push(this.dateCustom);
+      this.dateNow.startOf("year");
+    }
   }
 };
 </script>
