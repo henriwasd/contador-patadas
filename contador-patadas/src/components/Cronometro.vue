@@ -14,7 +14,7 @@
         <v-col class="mb-4">
           <h1 class="display-2 font-weight-bold mb-3">Contador de patadas</h1>
 
-          <p class="display-1 font-weight-medium">{{ this.dateNow }}</p>
+          <p class="display-1 font-weight-medium">{{ this.dateCustom }}</p>
           <v-btn
             v-on:click="times.push(dateNow)"
             class="mx-2"
@@ -55,18 +55,15 @@ export default {
 
   data: () => ({
     horaUltimaPatada: new Date(),
-    dateNow: moment()
-      .startOf("year")
-      .format("HH:mm:ss"),
-    times: []
+    dateNow: moment().startOf("year"),
+    times: [],
+    dateCustom: ""
   }),
   created: function() {
     const self = this;
     setInterval(function() {
-      self.dateNow = moment()
-        .add(1, "s")
-        .format("HH:mm:ss");
-    }, 100);
+      self.dateCustom = self.dateNow.add(1, "seconds").format("HH:mm:ss");
+    }, 1000);
   }
 };
 </script>
