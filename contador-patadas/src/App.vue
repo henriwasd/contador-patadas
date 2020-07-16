@@ -17,7 +17,7 @@ export default {
   },
 
   data: () => ({
-    //
+    //Teste de commit
   })
 };
 </script>
